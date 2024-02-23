@@ -1,0 +1,26 @@
+<?php
+session_start();
+include("conexao.php");
+
+
+$nome = mysqli_real_escape_string($conexao, trim($_POST['nome']));
+$duracao = mysqli_real_escape_string($conexao, trim($_POST['duracao']));
+$preco = mysqli_real_escape_string($conexao, trim(($_POST['preco'])));
+$descricao = mysqli_real_escape_string($conexao, trim(($_POST['descricao'])));
+
+    $sql = "SELECT count(*) as total from servicos where nome_servicos = '$nome'";
+    $result = mysqli_query($conexao, $sql);
+    
+    
+    $sql = "INSERT INTO `servicos`(`id_servicos`, `nome_servicos`, `duracao_servicos`, `preco_servicos`, `descricao_servicos`)
+     VALUES (NULL,'$nome','$duracao','$preco','$descricao')";
+    
+    if ($conexao->query($sql) === TRUE) {
+        $_SESSION['status_cadastro'] = true;
+    }
+    
+    $conexao->close();
+    
+    
+    header('Location: cad-servicos.php');
+    exit;

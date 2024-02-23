@@ -1,0 +1,37 @@
+.border-card {
+  border-bottom: 1.2px solid rgb(149, 149, 149);
+}
+
+.img-fundo {
+  margin: 20px;
+  width: 200px;
+  height: 200px;
+  border-radius: 100%;
+}
+
+.border-card-bottom {
+  border-bottom: 1.2px solid rgb(149, 149, 149);
+  padding: 10px;
+}
+
+.box-card {
+  margin-top: 10px;
+  border: none;
+}
+
+.dados-estabelecimento {
+  margin-top: 10px;
+}
+
+.button-editar {
+  margin: 10px;
+}
+
+.scroll {
+  height: 720px;
+  overflow: hidden;
+}
+
+.scroll:hover {
+  overflow: auto;
+}

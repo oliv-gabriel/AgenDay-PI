@@ -1,0 +1,38 @@
+.boxOne{
+  height: 490px;
+}
+
+.titulo-body {
+  border-bottom: 1px solid rgb(149, 149, 149);
+  box-shadow: rgb(149, 149, 149);
+  margin-bottom: 20px;
+}
+
+input {
+  margin: 10px auto;
+}
+
+.botao-salvar {
+  margin: 10px auto;
+  width: 150px;
+  height: 40px;
+}
+
+.form-floating{
+  width: 50%;
+}
+
+
+/* mostrar e ocultar senha */
+
+.login_oueter {
+  width: 20px;
+  max-width: 100%;
+}
+.logo_outer{
+  text-align: center;
+}
+.logo_outer img{
+  width:120px;
+  margin-bottom: 40px;
+}
