@@ -36,7 +36,8 @@ CREATE TABLE IF NOT EXISTS agenday.clientes(
     id_cliente integer auto_increment primary key,
     nome_cliente varchar(40) NOT NULL,
     email_cliete varchar(50) NOT NULL,
-    contato_cliente int(15) NOT NULL,
+    contato_cliente varchar(20) NOT NULL,
+    senha_cliente varchar(50) NOT NULL,
     arquivo_cliente varchar(255)
 );
 CREATE TABLE if NOT EXISTS agenday.funcionarios(

@@ -7,7 +7,6 @@ session_start();
     <meta charset="utf-8">
     <title>Login</title>
 
-
     <!-- BOOTSTRAP -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 
@@ -20,17 +19,23 @@ session_start();
 </head>
 
 <body>
-    <div class="container box " id="container">
+    <div class="container box <?= (isset($_SESSION['senhas_diferentes']) || isset($_SESSION['usuario_existe']) || isset($_SESSION['dados_cadastro'])) ? 'right-panel-active' : '' ?>" id="container">
 
         <div class="form-container sign-up-container">
             <form action="cadastrar.php" method="POST">
                 <h1>Criar Conta</h1>
 
+                <div class="user-type-toggle">
+                    <button type="button" class="toggle-btn active" id="btn-cliente" data-type="cliente">Sou Cliente</button>
+                    <button type="button" class="toggle-btn" id="btn-empresa" data-type="empresa">Sou Estabelecimento</button>
+                    <input type="hidden" name="tipo_usuario" id="tipo_usuario" value="<?= htmlspecialchars($_SESSION['dados_cadastro']['tipo_usuario'] ?? 'cliente') ?>">
+                </div>
+
                 <div class="row">
                     <div class="mb-2 col">
-                        <div class="input-group ">
-                            <input class="input rounded rounded-4" name="estabelecimento" type="text" placeholder=" " required />
-                            <label class="letra">Nome do estabelecimento</label>
+                        <div class="input-group">
+                            <input class="input rounded rounded-4" name="nome" id="input_nome" type="text" placeholder=" " value="<?= htmlspecialchars($_SESSION['dados_cadastro']['nome'] ?? '') ?>" required />
+                            <label class="letra" id="label_nome">Seu nome completo</label>
                         </div>
                     </div>
                 </div>
@@ -38,7 +43,16 @@ session_start();
                 <div class="row">
                     <div class="mb-2 col">
                         <div class="input-group">
-                            <input class="input rounded rounded-4" name="email" type="email" placeholder=" " required />
+                            <input class="input rounded rounded-4" name="contato" id="input_contato" type="tel" placeholder=" " value="<?= htmlspecialchars($_SESSION['dados_cadastro']['contato'] ?? '') ?>" required />
+                            <label class="letra" id="label_contato">Telefone / WhatsApp</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="mb-2 col">
+                        <div class="input-group">
+                            <input class="input rounded rounded-4" name="email" type="email" placeholder=" " value="<?= htmlspecialchars($_SESSION['dados_cadastro']['email'] ?? '') ?>" required />
                             <label class="letra">E-mail</label>
                         </div>
                     </div>
@@ -56,7 +70,7 @@ session_start();
                 <div class="row">
                     <div class="mb-2 col">
                         <div class="input-group">
-                            <input class="input rounded rounded-4" type="password" placeholder=" " required />
+                            <input class="input rounded rounded-4" name="repita_senha" type="password" placeholder=" " required />
                             <label class="letra">Repita a senha</label>
                         </div>
                     </div>
@@ -116,9 +130,8 @@ session_start();
     <?php
     if (isset($_SESSION['status_cadastro'])) :
     ?>
-        <div class="alert alert-success col-2 container fixed-bottom" role="alert">
+        <div class="alert alert-success fixed-top col-md-4 col-10 mx-auto mt-4 text-center shadow" style="z-index: 9999;" role="alert">
             Cadastro efetuado com sucesso!
-
         </div>
     <?php
     endif;
@@ -128,27 +141,36 @@ session_start();
     <?php
     if (isset($_SESSION['usuario_existe'])) :
     ?>
-        <div class="alert alert-danger col-2 container fixed-bottom" role="alert">
-            Nome de estabelecimento já existente
+        <div class="alert alert-danger fixed-top col-md-4 col-10 mx-auto mt-4 text-center shadow" style="z-index: 9999;" role="alert">
+            <?= is_string($_SESSION['usuario_existe']) ? htmlspecialchars($_SESSION['usuario_existe']) : 'Nome de estabelecimento ou e-mail já existente!' ?>
         </div>
     <?php
     endif;
     unset($_SESSION['usuario_existe']);
     ?>
 
+    <?php
+    if (isset($_SESSION['senhas_diferentes'])) :
+    ?>
+        <div class="alert alert-danger fixed-top col-md-4 col-10 mx-auto mt-4 text-center shadow" style="z-index: 9999;" role="alert">
+            As senhas não coincidem!
+        </div>
+    <?php
+    endif;
+    unset($_SESSION['senhas_diferentes']);
+    ?>
+
 
     <?php
     if (isset($_SESSION['nao_autenticado'])) :
     ?>
-
-        <div class="alert alert-danger col-2 container fixed-bottom" role="alert">
-
+        <div class="alert alert-danger fixed-top col-md-4 col-10 mx-auto mt-4 text-center shadow" style="z-index: 9999;" role="alert">
             E-mail ou senha inválidos.
-
         </div>
     <?php
     endif;
     unset($_SESSION['nao_autenticado']);
+    unset($_SESSION['dados_cadastro']);
     ?>
 
 

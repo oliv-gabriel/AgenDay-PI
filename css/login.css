@@ -70,9 +70,10 @@ form {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: 0 50px;
+  padding: 15px 40px;
   height: 100%;
   text-align: center;
+  overflow-y: auto;
 }
 
 .box {
@@ -104,7 +105,6 @@ form {
 }
 
 .sign-up-container {
-
   left: 0;
   width: 50%;
   opacity: 0;
@@ -207,37 +207,102 @@ form {
   margin: 20px 0;
 }
 
+.user-type-toggle {
+  display: flex;
+  background-color: #eef3f7;
+  border-radius: 30px;
+  padding: 4px;
+  margin: 10px 0 12px 0;
+  width: 100%;
+}
+
+.toggle-btn {
+  flex: 1;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 25px !important;
+  padding: 8px 12px !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  color: #6c757d !important;
+  cursor: pointer;
+  margin: 0 !important;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+  box-shadow: none !important;
+  transition: all 0.25s ease-in-out !important;
+}
+
+.toggle-btn.active {
+  background-color: #5cc6ba !important;
+  color: #ffffff !important;
+  box-shadow: 0 2px 8px rgba(92, 198, 186, 0.4) !important;
+}
+
+form .row {
+  width: 100%;
+}
+
 .input-group {
   position: relative;
+  width: 100%;
 }
 
 .input {
   outline: none;
   background-color: #ffffff;
-  border: none;
-  padding: 12px 90px;
+  padding: 12px 16px;
   margin: 8px 0;
   width: 100%;
-  border: 1px solid #444444;
+  border: 1px solid #777777;
+  border-radius: 14px;
+  font-size: 15px;
+  text-align: left;
+  color: #333333;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input:focus {
+  border-color: #333333;
+  box-shadow: none;
+  outline: none;
+}
+
+/* Remove fundo azul do autocomplete do navegador ao selecionar */
+.input:-webkit-autofill,
+.input:-webkit-autofill:hover,
+.input:-webkit-autofill:focus,
+.input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px #ffffff inset !important;
+  -webkit-text-fill-color: #333333 !important;
+  box-shadow: 0 0 0 30px #ffffff inset !important;
+  transition: background-color 5000s ease-in-out 0s;
 }
 
 .letra {
   position: absolute;
-  top: 20px;
-  left: 8px;
-  font-size: 18px;
-  padding: 0px 5px;
-  transition: 0.3s;
+  top: 31px;
+  left: 14px;
+  transform: translateY(-50%);
+  font-size: 14px;
+  color: #666666;
+  padding: 0 6px;
+  background-color: #ffffff;
+  transition: all 0.2s ease-in-out;
   pointer-events: none;
+  z-index: 2;
 }
 
 .input:focus + .letra,
 .input:not(:placeholder-shown) + .letra {
-  top: -3px;
+  top: 8px;
+  transform: translateY(-50%);
+  font-size: 12px;
+  font-weight: 600;
+  color: #333333;
   background-color: #ffffff;
 }
 
 .alert{
   text-align: center;
-
 }
